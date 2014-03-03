@@ -4,27 +4,28 @@
 	android:layout_height="wrap_content"
 	android:layout_width="match_parent"
 	android:padding="10dp">
-
+	
 	<LinearLayout
 		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
 		android:orientation="horizontal"
 		android:id="@+id/title_layout">
-
+		
 		<TextView
 			android:id="@+id/title"
 			android:layout_height="wrap_content"
 			android:layout_width="0dp"
+			android:layout_marginRight="10dp"
 			android:textAppearance="?android:attr/textAppearanceLarge"
 			android:layout_weight="1"/>
-
+		
 		<gov.moandor.notepad.widget.TimeTextView
 			android:id="@+id/time"
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"/>
-
+		
 	</LinearLayout>
-
+	
 	<TextView
 		android:id="@+id/preview"
 		android:layout_height="wrap_content"
@@ -32,6 +33,6 @@
 		android:layout_below="@id/title_layout"
 		android:layout_marginTop="10dp"
 		android:textAppearance="?android:attr/textAppearanceSmall"/>
-
+	
 </RelativeLayout>
 
