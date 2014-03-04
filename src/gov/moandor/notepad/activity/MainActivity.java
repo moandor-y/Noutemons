@@ -99,7 +99,7 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent();
         intent.setClass(this, TextEditorActivity.class);
-        intent.putExtra(TextEditorActivity.ARTICLE, (Article) mAdapter.getItem(position));
+        intent.putExtra(TextEditorActivity.ARTICLE, mAdapter.getItem(position));
         startActivityForResult(intent, REQUEST_TEXT_EDIT);
     }
     
@@ -149,8 +149,12 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
 		
 		@Override
 		public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-			// TODO: Implement this method
-			return false;
+			if (mListView.getCheckedItemCount() <= 1) {
+				menu.findItem(R.id.view_mode).setVisible(true);
+			} else {
+				menu.findItem(R.id.view_mode).setVisible(false);
+			}
+			return true;
 		}
 		
 		@Override
@@ -180,6 +184,7 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
 		public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
 			mAdapter.onItemCheckedStateChanged(position, checked);
 			mAdapter.notifyDataSetChanged();
+			mode.invalidate();
 		}
 		
 		private void delete() {
