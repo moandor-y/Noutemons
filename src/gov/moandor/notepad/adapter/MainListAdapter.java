@@ -27,7 +27,7 @@ public class MainListAdapter extends BaseAdapter {
     }
     
     @Override
-    public Object getItem(int position) {
+    public Article getItem(int position) {
         return mArticles.get(position);
     }
     
@@ -109,10 +109,24 @@ public class MainListAdapter extends BaseAdapter {
         }
     }
     
-    public List<Integer> getCheckedItemPositions() {
-        return mCheckedItemPositions;
+    public Integer[] getCheckedItemPositions() {
+		int size = mCheckedItemPositions.size();
+        return mCheckedItemPositions.toArray(new Integer[size]);
     }
+	
+	public void clearCheckedPositions() {
+		mCheckedItemPositions.clear();
+	}
     
+	public Article[] getCheckedItems() {
+		int size = mCheckedItemPositions.size();
+		Article[] result = new Article[size];
+		for (int i = 0; i < size; i++) {
+			result[i] = getItem(mCheckedItemPositions.get(i));
+		}
+		return result;
+	}
+	
     private class ViewHolder {
         public TextView title;
         public TextView preview;

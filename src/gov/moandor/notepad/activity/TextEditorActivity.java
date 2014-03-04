@@ -10,7 +10,7 @@ import android.widget.EditText;
 import gov.moandor.notepad.R;
 import gov.moandor.notepad.bean.Article;
 import gov.moandor.notepad.fragment.EditTitleDialogFragment;
-import gov.moandor.notepad.util.*;
+import gov.moandor.notepad.util.GlobalContext;
 
 public class TextEditorActivity extends AbsActivity {
     public static final String ARTICLE;
@@ -58,8 +58,12 @@ public class TextEditorActivity extends AbsActivity {
             }
             editTitleDialog.show(getFragmentManager(), EDIT_TEXT_DIALOG_FRAGMENT);
             return true;
+		case R.id.view_mode:
+			TextViewerActivity.start(mArticle, this);
+			return true;
+		default:
+		    return super.onOptionsItemSelected(item);
         }
-        return false;
     }
     
     @Override
@@ -90,7 +94,7 @@ public class TextEditorActivity extends AbsActivity {
         data.putExtra(ARTICLE, mArticle);
         setResult(RESULT_OK, data);
     }
-    
+	
     private EditTitleDialogFragment.OnEditFinishedListener mTitleEditFinishedListener =
             new EditTitleDialogFragment.OnEditFinishedListener() {
                 @Override
