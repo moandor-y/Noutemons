@@ -22,8 +22,8 @@ import java.util.List;
 
 public class MainActivity extends AbsActivity implements AdapterView.OnItemClickListener {
     private static final int REQUEST_TEXT_EDIT = 0;
-    private static final String DELETION_DIALOG_FRAGMENT_TAG = "deletion_dialog_feagment";
-    private static final String EDIT_TEXT_DIALOG_FRAGMENT_TAG = "edit_title_dialog_fragment";
+    private static final String DELETION_DIALOG_FRAGMENT = "deletion_dialog_feagment";
+    private static final String EDIT_TEXT_DIALOG_FRAGMENT = "edit_title_dialog_fragment";
     
     private MainListAdapter mAdapter;
     private ListView mListView;
@@ -162,7 +162,7 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
                         args.putString(ConfirmingDialogFragment.MESSAGE, getString(R.string.confirming_deletion));
                         confirmingDialog.setArguments(args);
                         confirmingDialog.setOnConfirmListener(mOnConfirmLinstener);
-                        confirmingDialog.show(getFragmentManager(), DELETION_DIALOG_FRAGMENT_TAG);
+                        confirmingDialog.show(getFragmentManager(), DELETION_DIALOG_FRAGMENT);
                         return true;
                     }
                     case R.id.edit_title: {
@@ -191,7 +191,7 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
                             args.putString(EditTitleDialogFragment.OLD_TITLE, title);
                             editTitleDialog.setArguments(args);
                         }
-                        editTitleDialog.show(getFragmentManager(), EDIT_TEXT_DIALOG_FRAGMENT_TAG);
+                        editTitleDialog.show(getFragmentManager(), EDIT_TEXT_DIALOG_FRAGMENT);
                         return true;
                     }
                     }

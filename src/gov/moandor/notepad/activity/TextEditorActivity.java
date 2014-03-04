@@ -10,11 +10,17 @@ import android.widget.EditText;
 import gov.moandor.notepad.R;
 import gov.moandor.notepad.bean.Article;
 import gov.moandor.notepad.fragment.EditTitleDialogFragment;
+import gov.moandor.notepad.util.*;
 
 public class TextEditorActivity extends AbsActivity {
-    public static final String ARTICLE = "article";
-    private static final String EDIT_TEXT_DIALOG_FRAGMENT_TAG = "edit_title_dialog_fragment";
+    public static final String ARTICLE;
+    private static final String EDIT_TEXT_DIALOG_FRAGMENT = "edit_title_dialog_fragment";
     
+	static {
+		String packageName = GlobalContext.getInstance().getPackageName();
+		ARTICLE = packageName + ".ARTICLE";
+	}
+	
     private EditText mContent;
     private Article mArticle;
     
@@ -50,7 +56,7 @@ public class TextEditorActivity extends AbsActivity {
                 args.putString(EditTitleDialogFragment.OLD_TITLE, mArticle.title);
                 editTitleDialog.setArguments(args);
             }
-            editTitleDialog.show(getFragmentManager(), EDIT_TEXT_DIALOG_FRAGMENT_TAG);
+            editTitleDialog.show(getFragmentManager(), EDIT_TEXT_DIALOG_FRAGMENT);
             return true;
         }
         return false;
