@@ -42,6 +42,16 @@ public class TextEditorActivity extends AbsActivity {
         getMenuInflater().inflate(R.menu.activity_text_editor, menu);
         return true;
     }
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		if (mArticle == null) {
+			menu.findItem(R.id.view_mode).setVisible(false);
+		} else {
+			menu.findItem(R.id.view_mode).setVisible(true);
+		}
+		return true;
+	}
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
