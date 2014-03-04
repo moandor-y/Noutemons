@@ -13,6 +13,7 @@ import gov.moandor.notepad.fragment.EditTitleDialogFragment;
 import gov.moandor.notepad.util.GlobalContext;
 
 public class TextEditorActivity extends AbsActivity {
+	private static final int MAX_TITLE_LENGTH = 30;
     public static final String ARTICLE;
     private static final String EDIT_TEXT_DIALOG_FRAGMENT = "edit_title_dialog_fragment";
     
@@ -77,11 +78,11 @@ public class TextEditorActivity extends AbsActivity {
         if (mArticle == null && !TextUtils.isEmpty(content)) {
             mArticle = new Article();
             mArticle.text = content;
-            if (content.length() > 10) {
-                mArticle.title = content.substring(0, 10);
-            } else {
-                mArticle.title = content;
+			String title = content.replace('\n', ' ').trim();
+            if (title.length() > MAX_TITLE_LENGTH) {
+                title = title.substring(0, MAX_TITLE_LENGTH);
             }
+            mArticle.title = title;
             setResult();
         } else if (mArticle != null && !TextUtils.isEmpty(content) && !content.equals(mArticle.text)) {
             mArticle.text = content;

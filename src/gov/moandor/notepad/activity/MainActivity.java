@@ -125,7 +125,7 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
                 int count = positions.length;
                 long[] ids = new long[count];
                 for (int i = 0; i < count; i++) {
-                    ids[i] = ((Article) mAdapter.getItem(positions[i])).id;
+                    ids[i] = mAdapter.getItem(positions[i]).id;
                 }
                 DatabaseUtils.editArticleTitles(ids, title);
                 return null;
@@ -196,10 +196,10 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
 			editTitleDialog.setOnEditFinishedListener(mEditTitleFinishedListener);
 			Integer[] checkedPositions = mAdapter.getCheckedItemPositions();
 			if (checkedPositions.length > 1) {
-				String prevTitle = ((Article) mAdapter.getItem(0)).title;
+				String prevTitle = mAdapter.getItem(0).title;
 				boolean displayOldTitle = true;
 				for (int position : checkedPositions) {
-					String title = ((Article) mAdapter.getItem(position)).title;
+					String title = mAdapter.getItem(position).title;
 					if (!title.equals(prevTitle)) {
 						displayOldTitle = false;
 						break;
@@ -212,7 +212,7 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
 					editTitleDialog.setArguments(args);
 				}
 			} else {
-				String title = ((Article) mAdapter.getItem(checkedPositions[0])).title;
+				String title = mAdapter.getItem(checkedPositions[0]).title;
 				Bundle args = new Bundle();
 				args.putString(EditTitleDialogFragment.OLD_TITLE, title);
 				editTitleDialog.setArguments(args);
@@ -233,7 +233,7 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
 			@Override
 			public void onConfirm() {
 				for (int position : mAdapter.getCheckedItemPositions()) {
-					startDeletionTask((Article) mAdapter.getItem(position));
+					startDeletionTask(mAdapter.getItem(position));
 				}
 				if (mActionMode != null) {
 					mActionMode.finish();

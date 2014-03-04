@@ -3,13 +3,13 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_height="wrap_content"
 	android:layout_width="match_parent"
-	android:padding="@dimen/margin">
+	android:padding="@dimen/margin" >
 	
 	<LinearLayout
 		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
 		android:orientation="horizontal"
-		android:id="@+id/title_layout">
+		android:id="@+id/title_layout" >
 		
 		<TextView
 			android:id="@+id/title"
@@ -17,12 +17,14 @@
 			android:layout_width="0dp"
 			android:layout_marginRight="@dimen/margin"
 			android:textAppearance="?android:attr/textAppearanceLarge"
-			android:layout_weight="1"/>
+			android:layout_weight="1"
+			android:singleLine="true"
+			android:ellipsize="end" />
 		
 		<gov.moandor.notepad.widget.TimeTextView
 			android:id="@+id/time"
 			android:layout_height="wrap_content"
-			android:layout_width="wrap_content"/>
+			android:layout_width="wrap_content" />
 		
 	</LinearLayout>
 	
@@ -32,7 +34,7 @@
 		android:layout_width="match_parent"
 		android:layout_below="@id/title_layout"
 		android:layout_marginTop="@dimen/margin"
-		android:textAppearance="?android:attr/textAppearanceSmall"/>
+		android:textAppearance="?android:attr/textAppearanceSmall" />
 	
 </RelativeLayout>
 
