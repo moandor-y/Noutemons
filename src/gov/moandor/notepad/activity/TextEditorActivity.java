@@ -51,7 +51,7 @@ public class TextEditorActivity extends AbsActivity {
             return true;
         case R.id.edit_title:
             EditTitleDialogFragment editTitleDialog = new EditTitleDialogFragment();
-            editTitleDialog.setOnEditFinishedListener(mTitleEditFinishedListener);
+            editTitleDialog.setOnEditFinishedListener(new TitleEditFinishedListener());
             if (mArticle != null) {
                 Bundle args = new Bundle();
                 args.putString(EditTitleDialogFragment.OLD_TITLE, mArticle.title);
@@ -96,18 +96,17 @@ public class TextEditorActivity extends AbsActivity {
         setResult(RESULT_OK, data);
     }
 	
-    private EditTitleDialogFragment.OnEditFinishedListener mTitleEditFinishedListener =
-            new EditTitleDialogFragment.OnEditFinishedListener() {
-                @Override
-                public void onEditFinished(String result) {
-                    if (!TextUtils.isEmpty(result)) {
-                        getActionBar().setTitle(result);
-                        if (mArticle == null) {
-                            mArticle = new Article();
-                        }
-                        mArticle.title = result;
-                        setResult();
-                    }
-                }
-            };
+	private class TitleEditFinishedListener implements EditTitleDialogFragment.OnEditFinishedListener {
+		@Override
+		public void onEditFinished(String result) {
+			if (!TextUtils.isEmpty(result)) {
+				getActionBar().setTitle(result);
+				if (mArticle == null) {
+					mArticle = new Article();
+				}
+				mArticle.title = result;
+				setResult();
+			}
+		}
+	}
 }

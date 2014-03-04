@@ -17,9 +17,7 @@ public class Utilities {
         try {
             c.close();
         } catch (Exception e) {
-            if (BuildConfig.DEBUG) {
-                e.printStackTrace();
-            }
+            Logger.logExcpetion(e);
         }
     }
     

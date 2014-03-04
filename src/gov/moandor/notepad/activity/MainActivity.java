@@ -22,8 +22,8 @@ import java.util.List;
 
 public class MainActivity extends AbsActivity implements AdapterView.OnItemClickListener {
     private static final int REQUEST_TEXT_EDIT = 0;
-    private static final String DELETION_DIALOG_FRAGMENT = "deletion_dialog_feagment";
-    private static final String EDIT_TEXT_DIALOG_FRAGMENT = "edit_title_dialog_fragment";
+    private static final String DELETION_DIALOG_FRAGMENT = "deletion_dialog";
+    private static final String EDIT_TEXT_DIALOG_FRAGMENT = "edit_title_dialog";
     
     private MainListAdapter mAdapter;
     private ListView mListView;
@@ -37,7 +37,7 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
         mAdapter = new MainListAdapter();
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
-        mListView.setMultiChoiceModeListener(mListMultiChoiceModeListener);
+        mListView.setMultiChoiceModeListener(new ListMultiChoiceModeListener());
         refresh();
     }
     
@@ -138,7 +138,6 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
     
-	private ListMultiChoiceModeListener mListMultiChoiceModeListener = new ListMultiChoiceModeListener();
 	private class ListMultiChoiceModeListener implements AbsListView.MultiChoiceModeListener {
 		@Override
 		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -192,13 +191,13 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
 			Bundle args = new Bundle();
 			args.putString(ConfirmingDialogFragment.MESSAGE, getString(R.string.confirming_deletion));
 			confirmingDialog.setArguments(args);
-			confirmingDialog.setOnConfirmListener(mOnConfirmLinstener);
+			confirmingDialog.setOnConfirmListener(new OnConfirmLinstener());
 			confirmingDialog.show(getFragmentManager(), DELETION_DIALOG_FRAGMENT);
 		}
 		
 		private void editTitle() {
 			EditTitleDialogFragment editTitleDialog = new EditTitleDialogFragment();
-			editTitleDialog.setOnEditFinishedListener(mEditTitleFinishedListener);
+			editTitleDialog.setOnEditFinishedListener(new EditTitleFinishedListener());
 			Integer[] checkedPositions = mAdapter.getCheckedItemPositions();
 			if (checkedPositions.length > 1) {
 				String prevTitle = mAdapter.getItem(0).title;
@@ -225,7 +224,6 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
 			editTitleDialog.show(getFragmentManager(), EDIT_TEXT_DIALOG_FRAGMENT);
 		}
 		
-		private EditTitleFinishedListener mEditTitleFinishedListener = new EditTitleFinishedListener();
     	private class EditTitleFinishedListener implements EditTitleDialogFragment.OnEditFinishedListener {
 			@Override
 			public void onEditFinished(String result) {
@@ -233,7 +231,6 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
 			}
     	}
 		
-		private OnConfirmLinstener mOnConfirmLinstener = new OnConfirmLinstener();
     	private class OnConfirmLinstener implements ConfirmingDialogFragment.OnConfirmListener {
 			@Override
 			public void onConfirm() {

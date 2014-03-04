@@ -10,6 +10,7 @@ import gov.moandor.notepad.util.Utilities;
 
 import java.util.ArrayList;
 import java.util.List;
+import gov.moandor.notepad.util.Logger;
 
 public class DatabaseUtils {
     private static DatabaseHelper sHelper;
@@ -84,9 +85,7 @@ public class DatabaseUtils {
                 article.text = cursor.getString(cursor.getColumnIndex(Table.Article.TEXT));
                 article.lastModified = cursor.getLong(cursor.getColumnIndex(Table.Article.LAST_MODIFIED));
             } catch (IllegalStateException e) {
-                if (BuildConfig.DEBUG) {
-                    e.printStackTrace();
-                }
+                Logger.logExcpetion(e);
             }
             result.add(article);
         }
