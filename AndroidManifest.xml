@@ -24,7 +24,8 @@
         </activity>
         
         <activity
-            android:name=".activity.TextEditorActivity" />
+            android:name=".activity.TextEditorActivity"
+			android:windowSoftInputMode="stateVisible|adjustResize" />
         
     </application>
     
