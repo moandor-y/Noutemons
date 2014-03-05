@@ -41,12 +41,6 @@ public class TextEditorActivity extends AbsActivity {
 		}
     }
 	
-	@Override
-	protected void onPause() {
-		super.onPause();
-		save();
-	}
-    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_text_editor, menu);
@@ -89,6 +83,12 @@ public class TextEditorActivity extends AbsActivity {
 		    return super.onOptionsItemSelected(item);
         }
     }
+	
+	@Override
+	public void finish() {
+		save();
+		super.finish();
+	}
     
     private void save() {
         String content = mContent.getText().toString();
