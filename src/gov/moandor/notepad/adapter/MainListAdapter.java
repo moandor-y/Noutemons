@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainListAdapter extends BaseAdapter {
-    private static final int PREVIEW_LENGTH = 20;
-    
     private List<Article> mArticles = new ArrayList<Article>();
     private LayoutInflater mInflater = GlobalContext.getInstance().getActivity().getLayoutInflater();
     private List<Integer> mCheckedItemPositions = new ArrayList<Integer>();
@@ -47,16 +45,13 @@ public class MainListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         Article article = mArticles.get(position);
-        if (article.preview == null) {
-            buildPreview(article);
-        }
         if (!article.title.equals(holder.title.getTag())) {
             holder.title.setText(article.title);
             holder.title.setTag(article.title);
         }
-        if (!article.preview.equals(holder.preview.getTag())) {
-            holder.preview.setText(article.preview);
-            holder.preview.setTag(article.preview);
+        if (!article.text.equals(holder.preview.getTag())) {
+            holder.preview.setText(article.text);
+            holder.preview.setTag(article.text);
         }
         holder.time.setTime(article.lastModified);
         if (mCheckedItemPositions.contains(position)) {
@@ -73,7 +68,6 @@ public class MainListAdapter extends BaseAdapter {
     }
     
     public void addOrUpdate(Article article) {
-        article.preview = null;
         int i;
         int count = mArticles.size();
         for (i = 0; i < count; i++) {
@@ -83,14 +77,6 @@ public class MainListAdapter extends BaseAdapter {
             }
         }
         mArticles.add(i, article);
-    }
-    
-    private void buildPreview(Article article) {
-        if (article.text.length() > PREVIEW_LENGTH) {
-            article.preview = article.text.substring(0, PREVIEW_LENGTH).replace("\n", " ") + "...";
-        } else {
-            article.preview = article.text.replace("\n", " ");
-        }
     }
     
     private ViewHolder initViewHolder(View view) {

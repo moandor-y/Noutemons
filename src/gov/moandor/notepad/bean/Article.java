@@ -7,7 +7,6 @@ public class Article implements Parcelable {
     public long id;
     public String text;
     public String title;
-    public String preview;
     public long lastModified;
     
     @Override
@@ -20,7 +19,6 @@ public class Article implements Parcelable {
         dest.writeLong(id);
         dest.writeString(text);
         dest.writeString(title);
-        dest.writeString(preview);
         dest.writeLong(lastModified);
     }
     
@@ -31,7 +29,6 @@ public class Article implements Parcelable {
             result.id = source.readLong();
             result.text = source.readString();
             result.title = source.readString();
-            result.preview = source.readString();
             result.lastModified = source.readLong();
             return result;
         }
