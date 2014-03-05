@@ -95,7 +95,7 @@ public class TextEditorActivity extends AbsActivity {
         if (mArticle == null && !TextUtils.isEmpty(content)) {
             mArticle = new Article();
             mArticle.text = content;
-			String title = content.replace('\n', ' ').trim();
+			String title = content.trim();
             if (title.length() > MAX_TITLE_LENGTH) {
                 title = title.substring(0, MAX_TITLE_LENGTH);
             }
