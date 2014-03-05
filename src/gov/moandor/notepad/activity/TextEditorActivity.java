@@ -31,11 +31,21 @@ public class TextEditorActivity extends AbsActivity {
         setContentView(R.layout.activity_text_editor);
         mContent = (EditText) findViewById(R.id.content);
         mArticle = getIntent().getParcelableExtra(ARTICLE);
+		getActionBar().setDisplayShowHomeEnabled(false);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
         if (mArticle != null) {
             mContent.setText(mArticle.text);
             getActionBar().setTitle(mArticle.title);
-        }
+        } else {
+			getActionBar().setTitle(R.string.create);
+		}
     }
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		save();
+	}
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,6 +66,9 @@ public class TextEditorActivity extends AbsActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			return true;
         case R.id.save:
             save();
             return true;
@@ -75,12 +88,6 @@ public class TextEditorActivity extends AbsActivity {
 		default:
 		    return super.onOptionsItemSelected(item);
         }
-    }
-    
-    @Override
-    public void onBackPressed() {
-        save();
-        super.onBackPressed();
     }
     
     private void save() {

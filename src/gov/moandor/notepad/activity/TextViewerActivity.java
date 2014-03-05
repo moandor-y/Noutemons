@@ -8,6 +8,7 @@ import gov.moandor.notepad.activity.TextViewerActivity;
 import gov.moandor.notepad.bean.Article;
 import gov.moandor.notepad.util.GlobalContext;
 import android.content.Context;
+import android.view.MenuItem;
 
 public class TextViewerActivity extends AbsActivity {
 	private static final String ARTICLE;
@@ -24,6 +25,20 @@ public class TextViewerActivity extends AbsActivity {
 		TextView text = (TextView) findViewById(R.id.text);
 		Article article = getIntent().getParcelableExtra(ARTICLE);
 		text.setText(article.text);
+		getActionBar().setDisplayShowHomeEnabled(false);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setTitle(article.title);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			return true;
+		default:
+		    return super.onOptionsItemSelected(item);
+		}
 	}
 	
 	public static void start(Article article, Context context) {
