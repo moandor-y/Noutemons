@@ -1,6 +1,5 @@
 package gov.moandor.notepad.util;
 
-import gov.moandor.notepad.BuildConfig;
 import gov.moandor.notepad.R;
 import gov.moandor.notepad.bean.Article;
 

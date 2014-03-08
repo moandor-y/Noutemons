@@ -138,109 +138,109 @@ public class MainActivity extends AbsActivity implements AdapterView.OnItemClick
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
     
-	private class ListMultiChoiceModeListener implements AbsListView.MultiChoiceModeListener {
-		@Override
-		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-			mode.getMenuInflater().inflate(R.menu.main_list_long_click, menu);
-			mActionMode = mode;
-			return true;
-		}
-		
-		@Override
-		public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-			if (mListView.getCheckedItemCount() <= 1) {
-				menu.findItem(R.id.view_mode).setVisible(true);
-			} else {
-				menu.findItem(R.id.view_mode).setVisible(false);
-			}
-			return true;
-		}
-		
-		@Override
-		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-			switch (item.getItemId()) {
-			case R.id.delete:
-				delete();
-				break;
-			case R.id.edit_title:
-				editTitle();
-				break;
-			case R.id.view_mode:
-				TextViewerActivity.start(mAdapter.getCheckedItems()[0], MainActivity.this);
-				break;
-			}
-			return false;
-		}
-		
-		@Override
-		public void onDestroyActionMode(ActionMode mode) {
-			mAdapter.clearCheckedPositions();
-			mAdapter.notifyDataSetChanged();
-			mActionMode = null;
-		}
-		
-		@Override
-		public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-			mAdapter.onItemCheckedStateChanged(position, checked);
-			mAdapter.notifyDataSetChanged();
-			mode.invalidate();
-		}
-		
-		private void delete() {
-			ConfirmingDialogFragment confirmingDialog = new ConfirmingDialogFragment();
-			Bundle args = new Bundle();
-			args.putString(ConfirmingDialogFragment.MESSAGE, getString(R.string.confirming_deletion));
-			confirmingDialog.setArguments(args);
-			confirmingDialog.setOnConfirmListener(new OnConfirmLinstener());
-			confirmingDialog.show(getFragmentManager(), DELETION_DIALOG_FRAGMENT);
-		}
-		
-		private void editTitle() {
-			EditTitleDialogFragment editTitleDialog = new EditTitleDialogFragment();
-			editTitleDialog.setOnEditFinishedListener(new EditTitleFinishedListener());
-			Integer[] checkedPositions = mAdapter.getCheckedItemPositions();
-			if (checkedPositions.length > 1) {
-				String prevTitle = mAdapter.getItem(0).title;
-				boolean displayOldTitle = true;
-				for (int position : checkedPositions) {
-					String title = mAdapter.getItem(position).title;
-					if (!title.equals(prevTitle)) {
-						displayOldTitle = false;
-						break;
-					}
-					prevTitle = title;
-				}
-				if (displayOldTitle) {
-					Bundle args = new Bundle();
-					args.putString(EditTitleDialogFragment.OLD_TITLE, prevTitle);
-					editTitleDialog.setArguments(args);
-				}
-			} else {
-				String title = mAdapter.getItem(checkedPositions[0]).title;
-				Bundle args = new Bundle();
-				args.putString(EditTitleDialogFragment.OLD_TITLE, title);
-				editTitleDialog.setArguments(args);
-			}
-			editTitleDialog.show(getFragmentManager(), EDIT_TEXT_DIALOG_FRAGMENT);
-		}
-		
-    	private class EditTitleFinishedListener implements EditTitleDialogFragment.OnEditFinishedListener {
-			@Override
-			public void onEditFinished(String result) {
-				startTitleEditTask(mAdapter.getCheckedItemPositions(), result);
-			}
-    	}
-		
-    	private class OnConfirmLinstener implements ConfirmingDialogFragment.OnConfirmListener {
-			@Override
-			public void onConfirm() {
-				for (int position : mAdapter.getCheckedItemPositions()) {
-					startDeletionTask(mAdapter.getItem(position));
-				}
-				if (mActionMode != null) {
-					mActionMode.finish();
-				}
-			}
-    	}
-	}
+    private class ListMultiChoiceModeListener implements AbsListView.MultiChoiceModeListener {
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            mode.getMenuInflater().inflate(R.menu.main_list_long_click, menu);
+            mActionMode = mode;
+            return true;
+        }
+        
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            if (mListView.getCheckedItemCount() <= 1) {
+                menu.findItem(R.id.view_mode).setVisible(true);
+            } else {
+                menu.findItem(R.id.view_mode).setVisible(false);
+            }
+            return true;
+        }
+        
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+            case R.id.delete:
+                delete();
+                break;
+            case R.id.edit_title:
+                editTitle();
+                break;
+            case R.id.view_mode:
+                TextViewerActivity.start(mAdapter.getCheckedItems()[0], MainActivity.this);
+                break;
+            }
+            return false;
+        }
+        
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            mAdapter.clearCheckedPositions();
+            mAdapter.notifyDataSetChanged();
+            mActionMode = null;
+        }
+        
+        @Override
+        public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+            mAdapter.onItemCheckedStateChanged(position, checked);
+            mAdapter.notifyDataSetChanged();
+            mode.invalidate();
+        }
+        
+        private void delete() {
+            ConfirmingDialogFragment confirmingDialog = new ConfirmingDialogFragment();
+            Bundle args = new Bundle();
+            args.putString(ConfirmingDialogFragment.MESSAGE, getString(R.string.confirming_deletion));
+            confirmingDialog.setArguments(args);
+            confirmingDialog.setOnConfirmListener(new OnConfirmLinstener());
+            confirmingDialog.show(getFragmentManager(), DELETION_DIALOG_FRAGMENT);
+        }
+        
+        private void editTitle() {
+            EditTitleDialogFragment editTitleDialog = new EditTitleDialogFragment();
+            editTitleDialog.setOnEditFinishedListener(new EditTitleFinishedListener());
+            Integer[] checkedPositions = mAdapter.getCheckedItemPositions();
+            if (checkedPositions.length > 1) {
+                String prevTitle = mAdapter.getItem(0).title;
+                boolean displayOldTitle = true;
+                for (int position : checkedPositions) {
+                    String title = mAdapter.getItem(position).title;
+                    if (!title.equals(prevTitle)) {
+                        displayOldTitle = false;
+                        break;
+                    }
+                    prevTitle = title;
+                }
+                if (displayOldTitle) {
+                    Bundle args = new Bundle();
+                    args.putString(EditTitleDialogFragment.OLD_TITLE, prevTitle);
+                    editTitleDialog.setArguments(args);
+                }
+            } else {
+                String title = mAdapter.getItem(checkedPositions[0]).title;
+                Bundle args = new Bundle();
+                args.putString(EditTitleDialogFragment.OLD_TITLE, title);
+                editTitleDialog.setArguments(args);
+            }
+            editTitleDialog.show(getFragmentManager(), EDIT_TEXT_DIALOG_FRAGMENT);
+        }
+        
+        private class EditTitleFinishedListener implements EditTitleDialogFragment.OnEditFinishedListener {
+            @Override
+            public void onEditFinished(String result) {
+                startTitleEditTask(mAdapter.getCheckedItemPositions(), result);
+            }
+        }
+        
+        private class OnConfirmLinstener implements ConfirmingDialogFragment.OnConfirmListener {
+            @Override
+            public void onConfirm() {
+                for (int position : mAdapter.getCheckedItemPositions()) {
+                    startDeletionTask(mAdapter.getItem(position));
+                }
+                if (mActionMode != null) {
+                    mActionMode.finish();
+                }
+            }
+        }
+    }
 }

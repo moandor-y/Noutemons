@@ -1,50 +1,50 @@
 package gov.moandor.notepad.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
+
 import gov.moandor.notepad.R;
-import gov.moandor.notepad.activity.TextViewerActivity;
 import gov.moandor.notepad.bean.Article;
 import gov.moandor.notepad.util.GlobalContext;
-import android.content.Context;
-import android.view.MenuItem;
 
 public class TextViewerActivity extends AbsActivity {
-	private static final String ARTICLE;
+    private static final String ARTICLE;
     
-	static {
-		String packageName = GlobalContext.getInstance().getPackageName();
-		ARTICLE = packageName + ".ARTICLE";
-	}
+    static {
+        String packageName = GlobalContext.getInstance().getPackageName();
+        ARTICLE = packageName + ".ARTICLE";
+    }
     
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_text_viewer);
-		TextView text = (TextView) findViewById(R.id.text);
-		Article article = getIntent().getParcelableExtra(ARTICLE);
-		text.setText(article.text);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(article.title);
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			finish();
-			return true;
-		default:
-		    return super.onOptionsItemSelected(item);
-		}
-	}
-	
-	public static void start(Article article, Context context) {
-		Intent intent = new Intent();
-		intent.setClass(GlobalContext.getInstance(), TextViewerActivity.class);
-		intent.putExtra(ARTICLE, article);
-		context.startActivity(intent);
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_text_viewer);
+        TextView text = (TextView) findViewById(R.id.text);
+        Article article = getIntent().getParcelableExtra(ARTICLE);
+        text.setText(article.text);
+        getActionBar().setDisplayShowHomeEnabled(false);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setTitle(article.title);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case android.R.id.home:
+            finish();
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+    
+    public static void start(Article article, Context context) {
+        Intent intent = new Intent();
+        intent.setClass(GlobalContext.getInstance(), TextViewerActivity.class);
+        intent.putExtra(ARTICLE, article);
+        context.startActivity(intent);
+    }
 }

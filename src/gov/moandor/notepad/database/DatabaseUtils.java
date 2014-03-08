@@ -4,13 +4,12 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import gov.moandor.notepad.BuildConfig;
 import gov.moandor.notepad.bean.Article;
+import gov.moandor.notepad.util.Logger;
 import gov.moandor.notepad.util.Utilities;
 
 import java.util.ArrayList;
 import java.util.List;
-import gov.moandor.notepad.util.Logger;
 
 public class DatabaseUtils {
     private static DatabaseHelper sHelper;

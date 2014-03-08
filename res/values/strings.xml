@@ -11,8 +11,8 @@
     <string name="edit_title">Edit title</string>
     <string name="title_is">Title :</string>
     <string name="enter_title">Enter title</string>
-	<string name="today">Today</string>
-	<string name="view_mode">View Mode</string>
-	<string name="create">Create</string>
+    <string name="today">Today</string>
+    <string name="view_mode">View Mode</string>
+    <string name="create">Create</string>
     
 </resources>

@@ -10,8 +10,8 @@
         android:title="@string/edit_title"
         android:icon="@drawable/edit" />
     
-	<item
+    <item
         android:id="@+id/view_mode"
         android:title="@string/view_mode" />
-	
+    
 </menu>

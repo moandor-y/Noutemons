@@ -12,9 +12,9 @@
         android:icon="@drawable/edit"
         android:showAsAction="ifRoom|withText" />
     
-	<item
+    <item
         android:id="@+id/view_mode"
         android:title="@string/view_mode"
         android:showAsAction="ifRoom|withText" />
-	
+    
 </menu>
