@@ -1,8 +1,12 @@
-bin/
-gen/
+biuld
+gradle
+.idea
+.gradle
 .settings
 .classpath
 .project
 lint.xml
 proguard.cfg
 project.properties
+local.properties
+gradle.properties
