@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">Noutemons</string>
+    <string name="add_new">Add new</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirming_deletion">Are you sure to delete?</string>
+    <string name="edit_title">Edit title</string>
+    <string name="title_is">Title :</string>
+    <string name="enter_title">Enter title</string>
+    <string name="today">Today</string>
+    <string name="view_mode">View Mode</string>
+    <string name="create">Create</string>
+    
+</resources>
