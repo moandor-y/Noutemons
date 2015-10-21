@@ -1,8 +1,8 @@
 package gov.moandor.notepad.activity;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,16 +32,19 @@ public class TextEditorActivity extends AbsActivity {
         setContentView(R.layout.activity_text_editor);
         mContent = (EditText) findViewById(R.id.content);
         mArticle = getIntent().getParcelableExtra(ARTICLE);
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayShowHomeEnabled(false);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            if (mArticle != null) {
-                mContent.setText(mArticle.text);
-                actionBar.setTitle(mArticle.title);
-            } else {
-                actionBar.setTitle(R.string.create);
-            }
+        if (mArticle != null) {
+            mContent.setText(mArticle.text);
+        }
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar == null) {
+            throw new AssertionError();
+        }
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (mArticle != null) {
+            actionBar.setTitle(mArticle.title);
+        } else {
+            actionBar.setTitle(R.string.create);
         }
     }
     
@@ -121,7 +124,7 @@ public class TextEditorActivity extends AbsActivity {
         @Override
         public void onEditFinished(String result) {
             if (!TextUtils.isEmpty(result)) {
-                ActionBar actionBar = getActionBar();
+                ActionBar actionBar = getSupportActionBar();
                 if (actionBar != null) {
                     actionBar.setTitle(result);
                 }

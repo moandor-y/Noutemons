@@ -1,9 +1,9 @@
 package gov.moandor.notepad.activity;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -26,12 +26,13 @@ public class TextViewerActivity extends AbsActivity {
         TextView text = (TextView) findViewById(R.id.text);
         Article article = getIntent().getParcelableExtra(ARTICLE);
         text.setText(article.text);
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayShowHomeEnabled(false);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(article.title);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar == null) {
+            throw new AssertionError();
         }
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle(article.title);
     }
     
     @Override
