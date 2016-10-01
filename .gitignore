@@ -1,5 +1,4 @@
 build/
-gradle/
 .idea
 .gradle
 .settings
@@ -10,3 +9,4 @@ proguard.cfg
 project.properties
 local.properties
 gradle.properties
+Noutemons.iml
